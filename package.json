@@ -1,0 +1,37 @@
+{
+  "name": "lab10_jorgeperez_18364",
+  "version": "1.0.0",
+  "description": "Lab10: Calculadora",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/per18364/Lab10_JorgePerez_18364.git"
+  },
+  "author": "Jorge Perez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/per18364/Lab10_JorgePerez_18364/issues"
+  },
+  "homepage": "https://github.com/per18364/Lab10_JorgePerez_18364#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "dependencies": {
+    "file-loader": "^6.2.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}
