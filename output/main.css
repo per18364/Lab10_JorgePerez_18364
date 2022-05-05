@@ -20,6 +20,7 @@ html, body{
     padding: 10px;
     font-size: 100px;
     position: relative;
+    border-radius: 8px 8px 0 0;
 }
 #text{
     position: absolute;
@@ -47,17 +48,22 @@ button{
 .ceroNumberKey{
     width: 200px;
     background-color: #faa094;
+    border-radius: 3px 3px 3px 8px;
 }
-.startNumberKey{
+.startNumberKey, .operatorKey, .operatorEnterKey{
     background-color: #9ed9cc;
-    color: white;
+    color: #faa094;
     border: 1px solid #faa094;
 }
-.operatorKey{
-    background-color: #9ed9cc;
-    color: white;
-    border: 1px solid #faa094;
+.operatorEnterKey{
+    border-radius: 3px 3px 8px 3px;
 }
 .numberKey{
     background-color: #faa094;
+}
+button:hover{
+    filter: brightness(85%);
+}
+button:active{
+    filter: brightness(75%);
 }
