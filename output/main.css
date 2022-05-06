@@ -1,42 +1,47 @@
 /*!*****************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/index.css ***!
   \*****************************************************************/
-html, body{
+html,
+body {
     width: 99%;
     height: 99%;
     display: flex;
-    background: radial-gradient(circle, rgba(255,221,226,1) 46%, rgba(0,140,118,1) 100%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 221, 226, 1) 46%,
+        rgba(0, 140, 118, 1) 100%
+    );
 }
-#root{
+#root {
     width: 400px;
     height: 700px;
     margin: auto;
 }
-#display{
+#display {
     height: 200px;
     background-color: #008c76;
     color: white;
     text-align: right;
     padding: 10px;
-    font-size: 100px;
+    font-size: 60px;
     position: relative;
     border-radius: 8px 8px 0 0;
 }
-#text{
+#text {
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    right: 10px;
 }
-#buttonContainer{
+#buttonContainer {
     display: flex;
 }
-#numberContainer{
+#numberContainer {
     width: 300px;
 }
-#operatorContainer{
+#operatorContainer {
     width: 100px;
 }
-button{
+button {
     height: 100px;
     width: 100px;
     font-size: 35px;
@@ -45,25 +50,29 @@ button{
     color: #9ed9cc;
     border-radius: 3px;
 }
-.ceroNumberKey{
+#ceroNumberKey {
     width: 200px;
     background-color: #faa094;
     border-radius: 3px 3px 3px 8px;
 }
-.startNumberKey, .operatorKey, .operatorEnterKey{
+#startNumberKey,
+#operatorKey,
+#operatorEnterKey {
     background-color: #9ed9cc;
     color: #faa094;
     border: 1px solid #faa094;
 }
-.operatorEnterKey{
+.operatorEnterKey {
     border-radius: 3px 3px 8px 3px;
 }
-.numberKey{
+#numberKey {
     background-color: #faa094;
 }
-button:hover{
+
+button:hover {
     filter: brightness(85%);
 }
-button:active{
+button:active {
     filter: brightness(75%);
 }
+

@@ -2,172 +2,200 @@ import React, { useState, useEffect } from 'react'
 import '../index.css'
 import Display from './display.js'
 
-const keysInfo = [
-    { value: 'clear', dataKc: '67' },
-    { value: 'toggle', dataKc: '84' },
-    { value: 'mod', dataKc: '88' },
-    { value: '1', dataKc: '49' },
-    { value: '2', dataKc: '50' },
-    { value: '3', dataKc: '51' },
-    { value: '4', dataKc: '52' },
-    { value: '5', dataKc: '53' },
-    { value: '6', dataKc: '54' },
-    { value: '7', dataKc: '55' },
-    { value: '8', dataKc: '56' },
-    { value: '9', dataKc: '57' },
-    { value: '0', dataKc: '48' },
-    { value: '.', dataKc: '190' },
-    { value: 'div', dataKc: '47' },
-    { value: 'mult', dataKc: '221' },
-    { value: 'sub', dataKc: '189' },
-    { value: 'sum', dataKc: '187' },
-    { value: '13', dataKc: 'submit' },
-]
-
 export default function Buttons() {
-    const handleClick = () => {
-        return
+    const [startState, setStartState] = useState('')
+    const [currentState, setCurrentState] = useState('')
+    const [input, setInput] = useState('0')
+    const [operator, setOperator] = useState(null)
+    const [result, setResult] = useState(false)
+
+    var disp = document.getElementById('display')
+    var err = document.createElement('div')
+    err.id = 'error'
+    err.innerHTML = 'ERROR'
+    err.style.fontSize = '60px'
+    err.style.position = 'absolute'
+    err.style.bottom = '20px'
+    err.style.right = '10px'
+    var error = document.getElementById('error')
+
+    const inputNum = (e) => {
+        if (currentState.includes('.') && e.target.innerText === '.') return
+
+        if (result) {
+            setStartState('')
+        }
+        currentState
+            ? setCurrentState((pre) => pre + e.target.innerText)
+            : setCurrentState(e.target.innerText)
+        setResult(false)
+    }
+
+    useEffect(() => {
+        // setInput(currentState)
+        if (currentState.length >= 10) {
+            return
+        } else {
+            setInput(currentState)
+        }
+    }, [currentState])
+
+    useEffect(() => {
+        setInput('0')
+    }, [])
+
+    const reset = () => {
+        setStartState('0')
+        setCurrentState('')
+        setInput('0')
+        error.remove()
+    }
+
+    const minusPlus = () => {
+        if (currentState.charAt(0) === '-') {
+            setCurrentState(currentState.substring(1))
+        } else {
+            setCurrentState('-' + currentState)
+        }
+    }
+
+    const operatorType = (e) => {
+        setResult(false)
+        setOperator(e.target.innerText)
+
+        if (currentState === '') return
+
+        if (startState !== '') {
+            equal()
+        } else {
+            setStartState(currentState)
+            setCurrentState('')
+        }
+    }
+
+    const equal = (e) => {
+        if (e?.target.innerText === '=') {
+            setResult(true)
+        }
+        let calc
+        switch (operator) {
+            case '÷':
+                calc = String(parseFloat(startState) / parseFloat(currentState))
+                break
+            case '+':
+                calc = String(parseFloat(startState) + parseFloat(currentState))
+                break
+            case '-':
+                calc = String(parseFloat(startState) - parseFloat(currentState))
+                break
+            case 'x':
+                calc = String(parseFloat(startState) * parseFloat(currentState))
+                break
+            case '%':
+                calc = String(parseFloat(startState) % parseFloat(currentState))
+                break
+
+            default:
+                return
+        }
+
+        if (calc.length > 9) {
+            disp.append(err)
+            setInput('')
+            setStartState('')
+            setCurrentState('')
+            console.log(startState)
+            console.log(currentState)
+            console.log(input)
+            console.log(calc)
+        } else {
+            setInput('')
+            setStartState(calc)
+            setCurrentState('')
+            console.log(calc)
+        }
     }
 
     return (
         <>
-            <Display />
+            <Display input={input} startState={startState} />
             <div id='buttonContainer'>
                 <div id='numberContainer'>
-                    <button
-                        className='startNumberKey'
-                        type='button'
-                        value={keysInfo[0].value}
-                        data-keycode='67'
-                        onClick={handleClick}>
+                    <button id='startNumberKey' type='button' onClick={reset}>
                         C
                     </button>
                     <button
-                        className='startNumberKey'
+                        id='startNumberKey'
                         type='button'
-                        value={keysInfo[1].value}
-                        data-keycode='84'>
+                        onClick={minusPlus}>
                         +/-
                     </button>
                     <button
-                        className='startNumberKey'
+                        id='startNumberKey'
                         type='button'
-                        value={keysInfo[2].value}
-                        data-keycode='88'>
+                        onClick={operatorType}>
                         %
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[3].value}
-                        data-keycode='49'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         1
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[4].value}
-                        data-keycode='50'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         2
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[5].value}
-                        data-keycode='51'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         3
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[6].value}
-                        data-keycode='52'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         4
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[7].value}
-                        data-keycode='53'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         5
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[8].value}
-                        data-keycode='54'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         6
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[9].value}
-                        data-keycode='55'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         7
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[10].value}
-                        data-keycode='56'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         8
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[11].value}
-                        data-keycode='57'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         9
                     </button>
-                    <button
-                        className='ceroNumberKey'
-                        type='button'
-                        value={keysInfo[12].value}
-                        data-keycode='48'>
+                    <button id='ceroNumberKey' type='button' onClick={inputNum}>
                         0
                     </button>
-                    <button
-                        className='numberKey'
-                        type='button'
-                        value={keysInfo[13].value}
-                        data-keycode='190'>
+                    <button id='numberKey' type='button' onClick={inputNum}>
                         .
                     </button>
                 </div>
                 <div id='operatorContainer'>
                     <button
-                        className='operatorKey'
+                        id='operatorKey'
                         type='button'
-                        value={keysInfo[14].value}
-                        data-keycode='47'>
+                        onClick={operatorType}>
                         ÷
                     </button>
                     <button
-                        className='operatorKey'
+                        id='operatorKey'
                         type='button'
-                        value={keysInfo[15].value}
-                        data-keycode='mult'>
+                        onClick={operatorType}>
                         x
                     </button>
                     <button
-                        className='operatorKey'
+                        id='operatorKey'
                         type='button'
-                        value={keysInfo[16].value}
-                        data-keycode='sub'>
+                        onClick={operatorType}>
                         -
                     </button>
                     <button
-                        className='operatorKey'
+                        id='operatorKey'
                         type='button'
-                        value={keysInfo[17].value}
-                        data-keycode='sum'>
+                        onClick={operatorType}>
                         +
                     </button>
-                    <button
-                        className='operatorEnterKey'
-                        type='button'
-                        value={keysInfo[18].value}
-                        data-keycode='13'>
+                    <button id='operatorEnterKey' type='button' onClick={equal}>
                         =
                     </button>
                 </div>

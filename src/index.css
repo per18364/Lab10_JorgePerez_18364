@@ -20,14 +20,14 @@ body {
     color: white;
     text-align: right;
     padding: 10px;
-    font-size: 100px;
+    font-size: 60px;
     position: relative;
     border-radius: 8px 8px 0 0;
 }
 #text {
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    right: 10px;
 }
 #buttonContainer {
     display: flex;
@@ -47,14 +47,14 @@ button {
     color: #9ed9cc;
     border-radius: 3px;
 }
-.ceroNumberKey {
+#ceroNumberKey {
     width: 200px;
     background-color: #faa094;
     border-radius: 3px 3px 3px 8px;
 }
-.startNumberKey,
-.operatorKey,
-.operatorEnterKey {
+#startNumberKey,
+#operatorKey,
+#operatorEnterKey {
     background-color: #9ed9cc;
     color: #faa094;
     border: 1px solid #faa094;
@@ -62,9 +62,10 @@ button {
 .operatorEnterKey {
     border-radius: 3px 3px 8px 3px;
 }
-.numberKey {
+#numberKey {
     background-color: #faa094;
 }
+
 button:hover {
     filter: brightness(85%);
 }
